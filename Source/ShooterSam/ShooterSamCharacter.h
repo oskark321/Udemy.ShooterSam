@@ -12,6 +12,9 @@ class UCameraComponent;
 class UInputAction;
 struct FInputActionValue;
 class AGun;
+class UInputComponent;
+class UDamageType;
+class AController;
 
 DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
 
@@ -66,7 +69,7 @@ protected:
 	virtual void BeginPlay() override;
 
 	/** Initialize input action bindings */
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
 
 protected:
 
@@ -111,14 +114,14 @@ public:
 public:
 
 	/** Returns CameraBoom subobject **/
-	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
+	FORCEINLINE USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
 
 	/** Returns FollowCamera subobject **/
-	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
+	FORCEINLINE UCameraComponent* GetFollowCamera() const { return FollowCamera; }
 
 	//S5 L167
 	UFUNCTION() //musi być UFUNCTION ponieważ bedziey ją używać z systemem delegatów
-	void OnDamageTaken(AActor* DamagedActor, float Damage, const class UDamageType* DamageType, class AController* InstigatedBy, AActor* DamageCauser);
+	void OnDamageTaken(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatedBy, AActor* DamageCauser);
 	//tworzymy funkcję otrzymane obrażenia do deleata OnTakeAnyDamage czyli muszą być specjalne argumenty(aktor który został uszkodzony, rozmiar wyrządzonych szkód pobiera to z funkcji
 	//PullTrigger w AGun, rodzaj wyrządzoych szkód, kontroler, aktor który spowodował szkody)
 
